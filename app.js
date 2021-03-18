@@ -104,6 +104,15 @@ function addEmployee() {
         }
         else {
             console.log("Attempting yeet");
+            fs.writeFileSync(outputPath, render(team), function(err) {
+                if (err){
+                    console.log(err)
+                }
+                else {
+                    console.log("Output complete.")
+                }
+                console.log("Yeeted")
+            });
         }
     })
 };
@@ -121,7 +130,7 @@ function managerQuestions () {
 function engineerQuestions() {
     console.log("add engineeer started!");
     inquirer.prompt(eQuestions).then((eData) => {
-        let newEngineer = new Engineer(eData.eName, eData.eId, eData.eMail, eData.eGithub);
+        let newEngineer = new Engineer(eData.name, eData.id, eData.email, eData.github);
         team.push(newEngineer);
         addEmployee();
     }
@@ -143,16 +152,8 @@ function internQuestions() {
     console.log("begin");
     addEmployee();
     console.log("Finalizing YEET");
-fs.writeFileSync(outputPath, render(team), function(err) {
-    if (err){
-        console.log(err)
-    }
-    else {
-        console.log("Output complete.")
-    }
 
-});
-console.log("Yeeted")
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
