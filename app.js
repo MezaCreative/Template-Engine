@@ -7,84 +7,147 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
+let addLoop = true;
 const render = require("./lib/htmlRenderer");
-
-
-const firstQuestion = [
-    {
-        type: "list" ,
-        name: "addRoles",
-        message: "Who would you like to add?",
-        choices:["Manager, Engineer, Intern, Finish"]
-    },
-];
+const team =[];
+//array of questions
 const mQuestions = [
     {
         type: "input" ,
-        name: "mName",
+        name: "name",
         message: "What is the managers name?",
     },
     {
         type: "input" ,
-        name: "mOffice",
+        name: "office",
         message: "What is the manager's office number?",
     },
     {
         type: "input" ,
-        name: "mID",
+        name: "id",
         message: "What is the manager's ID?",
     },
     {
         type: "input" ,
-        name: "mEmail",
+        name: "email",
         message: "What is the manager's email address?",
     },
 ];
 const eQuestions = [
     {
         type: "input" ,
-        name: "eName",
+        name: "name",
         message: "What is the engineer's name?",
     },
     {
         type: "input" ,
-        name: "eGithub",
+        name: "github",
         message: "What is the engineer's Github Username?",
     },
     {
         type: "input" ,
-        name: "eEmail",
+        name: "email",
         message: "What is the engineer's email address?",
     },
     {
         type: "input" ,
-        name: "eId",
+        name: "id",
         message: "What is the engineer's ID?",
     },
 ];
 const iQuestions = [
     {
         type: "input" ,
-        name: "iName",
+        name: "name",
         message: "What is the intern's name?",
     },
     {
         type: "input" ,
-        name: "iSchool",
+        name: "school",
         message: "What is the interns's school name?",
     },
     {
         type: "input" ,
-        name: "iEmail",
+        name: "email",
         message: "What is the interns's email address?",
     },
     {
         type: "input" ,
-        name: "eEmail",
+        name: "id",
         message: "What is the intern's ID?",
     },
 ];
+//function to add employee or quit
+function addEmployee() {
+    const firstQuestion = [
+        {
+            type: "list" ,
+            name: "addRoles",
+            message: "Who would you like to add?",
+            choices:["Manager, Engineer, Intern, Finish"]
+        },
+    ];
+
+    inquirer.prompt(firstQuestion).then(function(data) {
+        console.log("the choice is " + data.addRoles);
+        const employeeType = data.addRoles;
+        console.log("Employee Type is " + employeeType);
+        if (employeeType == "Manager") {
+            managerQuestions;
+        }
+        else if (empolyeeType == "Engineer") {
+            engineerQuestions;
+        }
+        else if (employeeType == "Intern") {
+            internQuestions;
+        }
+        else {
+            
+        }
+    })
+};
+// functions to return data for each type of employee
+function managerQuestions () {
+    inquirer.prompt(mQuestions).then((mData) => {
+        let newManager = new Manager(mData.name, mData.id, mData.email, mData.office);
+        team.push(newManager);
+    }
+    );
+    addEmployee();
+};
+function engineerQuestions() {
+    inquirer.prompt(eQuestions).then((eData) => {
+        let newEngineer = new Engineer(eData.eName, eData.eId. eData.eMail, eData.eGithub);
+        team.push(newEngineer);
+
+    }
+    );
+    addEmployee();
+}
+function internQuestions() {
+    inquierer.prompt(iQuestions).then((iData) => {
+        let newIntern = new Intern(iData.name, idata.id, iData.email, iData.school);
+        team.push(newIntern);
+        
+    }
+    );
+    addEmployee();
+}
+// Until the user decides to quit, this will continue to run
+
+    console.log("begin");
+    addEmployee();
+
+fs.writeFileSync(outputPath, render(team), function(err) {
+    if (err){
+        console.log(err)
+    }
+    else {
+        console.log("Output complete.")
+    }
+    
+
+});
 
 
 // Write code to use inquirer to gather information about the development team members,
