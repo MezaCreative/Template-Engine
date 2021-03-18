@@ -84,7 +84,7 @@ function addEmployee() {
             type: "list" ,
             name: "addRoles",
             message: "Who would you like to add?",
-            choices:["Manager, Engineer, Intern, Finish"]
+            choices:["Manager", "Engineer", "Intern", "Finish"]
         },
     ];
 
@@ -92,52 +92,57 @@ function addEmployee() {
         console.log("the choice is " + data.addRoles);
         const employeeType = data.addRoles;
         console.log("Employee Type is " + employeeType);
-        if (employeeType == "Manager") {
-            managerQuestions;
+        if (employeeType === "Manager") {
+            console.log("part 1 succedded")
+            managerQuestions();
         }
-        else if (empolyeeType == "Engineer") {
-            engineerQuestions;
+        else if (employeeType === "Engineer") {
+            engineerQuestions();
         }
-        else if (employeeType == "Intern") {
-            internQuestions;
+        else if (employeeType === "Intern") {
+            internQuestions();
         }
         else {
-            
+            console.log("Attempting yeet");
         }
     })
 };
 // functions to return data for each type of employee
 function managerQuestions () {
+    console.log("Part 2 succedded")
     inquirer.prompt(mQuestions).then((mData) => {
         let newManager = new Manager(mData.name, mData.id, mData.email, mData.office);
         team.push(newManager);
+        addEmployee();
     }
     );
-    addEmployee();
+    
 };
 function engineerQuestions() {
+    console.log("add engineeer started!");
     inquirer.prompt(eQuestions).then((eData) => {
-        let newEngineer = new Engineer(eData.eName, eData.eId. eData.eMail, eData.eGithub);
+        let newEngineer = new Engineer(eData.eName, eData.eId, eData.eMail, eData.eGithub);
         team.push(newEngineer);
-
+        addEmployee();
     }
     );
-    addEmployee();
+    
 }
 function internQuestions() {
-    inquierer.prompt(iQuestions).then((iData) => {
-        let newIntern = new Intern(iData.name, idata.id, iData.email, iData.school);
+    console.log("attempting intern question");
+    inquirer.prompt(iQuestions).then((iData) => {
+        let newIntern = new Intern(iData.name, iData.id, iData.email, iData.school);
         team.push(newIntern);
-        
+        addEmployee();
     }
     );
-    addEmployee();
+    
 }
 // Until the user decides to quit, this will continue to run
 
     console.log("begin");
     addEmployee();
-
+    console.log("Finalizing YEET");
 fs.writeFileSync(outputPath, render(team), function(err) {
     if (err){
         console.log(err)
@@ -145,10 +150,9 @@ fs.writeFileSync(outputPath, render(team), function(err) {
     else {
         console.log("Output complete.")
     }
-    
 
 });
-
+console.log("Yeeted")
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
