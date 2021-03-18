@@ -28,7 +28,7 @@
 
   [Video](https://drive.google.com/file/d/1N5KRkkdhPeLxs2TavuBQj0NFhRfjbuAn/view) link showing how to use the template engine.
     
-    ![Image](https://github.com/MezaCreative/Template-Engine/blob/main/assets/landing.png)
+  ![Image](https://github.com/MezaCreative/Template-Engine/blob/main/assets/landing.png)
   ## Contributing
 
   Contributions can be made by contacting my email
